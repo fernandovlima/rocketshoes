@@ -30,6 +30,7 @@ export const Container = styled.div`
 
 export const ProductTable = styled.div`
   width: 100%;
+  justify-content: space-between;
 
   thead th {
     color: #999;

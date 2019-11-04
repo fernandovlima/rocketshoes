@@ -26,6 +26,7 @@ module.exports = {
     'react/static-property-placement': 'off',
     'no-throw-literal': 'off',
     'no-console': 'off',
+    'no-param-reassign': 'off',
     'react/prefer-stateless-function': 'off',
   },
 };
