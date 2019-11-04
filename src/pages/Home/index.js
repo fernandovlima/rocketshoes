@@ -1,101 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import { MdAddShoppingCart } from 'react-icons/md';
+import { formatPrice } from '../../util/format';
+
+import api from '../../services/api';
 
 import { ProductList } from './styles';
 
-export default function Home() {
-  return (
-    <ProductList>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
+export default class Home extends Component {
+  state = {
+    products: [],
+  };
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
+  async componentDidMount() {
+    const response = await api.get('/products');
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
+    this.setState({
+      products: data,
+    });
+  }
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
+  render() {
+    const { products } = this.state;
+    return (
+      <ProductList>
+        {products.map(product => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://lojavans.vteximg.com.br/arquivos/ids/281427-400-400/VN0A38DMJY3_001.jpg?v=637073671454900000"
-          alt="tenis"
-        />
-        <strong>Tênis Skate</strong>
-        <span>R$ 199,90</span>
-
-        <button type="button">
-          <div>
-            <MdAddShoppingCart color="#FFF" size={16} /> 3
-          </div>
-          <span>ADD TO CART</span>
-        </button>
-      </li>
-    </ProductList>
-  );
+            <button type="button">
+              <div>
+                <MdAddShoppingCart color="#FFF" size={16} /> 1
+              </div>
+              <span>ADD TO CART</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }

@@ -1,20 +1,20 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es6: true,
   },
   extends: ['airbnb', 'prettier', 'prettier/react'],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react', 'prettier'],
   rules: {
@@ -25,6 +25,7 @@ module.exports = {
     'react/no-unused-state': 'off',
     'react/static-property-placement': 'off',
     'no-throw-literal': 'off',
-    'no-console': 'off'
-  }
+    'no-console': 'off',
+    'react/prefer-stateless-function': 'off',
+  },
 };
